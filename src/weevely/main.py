@@ -28,6 +28,31 @@ if sys.stdout.encoding is None:
 
 def main(arguments):
     if arguments.command == "generate":
+        # Auto-detect agent based on extension if default is used
+        if arguments.agent == "obfpost_php" and arguments.path != "-":
+            ext = os.path.splitext(arguments.path)[1].lower()
+            if ext == ".jsp":
+                arguments.agent = "obfpost_jsp"
+                arguments.obfuscator = "raw"
+            elif ext == ".cfm":
+                arguments.agent = "obfpost_cfm"
+                arguments.obfuscator = "raw"
+            elif ext == ".asp":
+                arguments.agent = "obfpost_asp"
+                arguments.obfuscator = "raw"
+            elif ext == ".aspx":
+                arguments.agent = "obfpost_aspx"
+                arguments.obfuscator = "raw"
+            elif ext == ".py":
+                arguments.agent = "obfpost_cgi_python"
+                arguments.obfuscator = "raw"
+            elif ext == ".pl":
+                arguments.agent = "obfpost_cgi_perl"
+                arguments.obfuscator = "raw"
+            elif ext == ".js":
+                arguments.agent = "obfpost_node"
+                arguments.obfuscator = "raw"
+
         obfuscated = generate.generate(
             password=arguments.password, obfuscator=arguments.obfuscator, agent=arguments.agent
         )

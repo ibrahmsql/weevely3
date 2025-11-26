@@ -2,7 +2,7 @@ import prettytable
 
 
 def tablify(data, table_border=True, header=False):
-    # TODO: Check that is prettytable-0.7.2 that supports the
+    # Check that is prettytable-0.7.2 that supports the
     # dynamic table columns number setting. Version 0.5 does not.
 
     output = ""

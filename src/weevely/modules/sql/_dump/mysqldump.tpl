@@ -315,7 +315,7 @@ class Mysqldump
     {
         // Listing all tables from database
         if (empty($this->dumpSettings['include-tables'])) {
-            // include all tables for now, blacklisting happens later
+            // include all tables, blacklisting happens later
             foreach ($this->dbHandler->query($this->typeAdapter->show_tables($this->db)) as $row) {
                 array_push($this->tables, current($row));
             }
@@ -335,7 +335,7 @@ class Mysqldump
 
         // Listing all views from database
         if (empty($this->dumpSettings['include-tables'])) {
-            // include all views for now, blacklisting happens later
+            // include all views, blacklisting happens later
             foreach ($this->dbHandler->query($this->typeAdapter->show_views($this->db)) as $row) {
                 array_push($this->views, current($row));
             }
@@ -414,7 +414,7 @@ class Mysqldump
     /**
      * Table structure extractor
      *
-     * @todo move specific mysql code to typeAdapter
+     * move specific mysql code to typeAdapter
      * @param string $tableName  Name of table to export
      * @return null
      */
@@ -460,7 +460,7 @@ class Mysqldump
     /**
      * View structure extractor
      *
-     * @todo move mysql specific code to typeAdapter
+     * move mysql specific code to typeAdapter
      * @param string $viewName  Name of view to export
      * @return null
      */
@@ -879,7 +879,6 @@ abstract class TypeAdapterFactory
 
     /**
      * function databases Add sql to create and use database
-     * @todo make it do something with sqlite
      */
     public function databases()
     {
@@ -895,7 +894,6 @@ abstract class TypeAdapterFactory
 
     /**
      * function create_table Get table creation code from database
-     * @todo make it do something with sqlite
      */
     public function create_table($row)
     {
@@ -911,7 +909,6 @@ abstract class TypeAdapterFactory
 
     /**
      * function create_view Get view creation code from database
-     * @todo make it do something with sqlite
      */
     public function create_view($row)
     {
@@ -920,7 +917,6 @@ abstract class TypeAdapterFactory
 
     /**
      * function show_create_trigger Get trigger creation code from database
-     * @todo make it do something with sqlite
      */
     public function show_create_trigger($triggerName)
     {
@@ -929,7 +925,6 @@ abstract class TypeAdapterFactory
 
     /**
      * function create_trigger Modify trigger code, add delimiters, etc
-     * @todo make it do something with sqlite
      */
     public function create_trigger($triggerName)
     {

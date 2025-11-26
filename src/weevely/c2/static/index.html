@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEEVELY C2 // COMMAND CENTER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="bg-grid"></div>
+
+    <div class="app-container">
+        <!-- Header / HUD -->
+        <header class="hud-header">
+            <div class="logo-area">
+                <h1 class="glitch" data-text="WEEVELY_C2">WEEVELY_C2</h1>
+            </div>
+            <div class="system-stats">
+                <div class="stat-item">
+                    <span class="label">NET:</span>
+                    <span class="value online">ONLINE</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">SEC:</span>
+                    <span class="value secure">ENCRYPTED</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">TIME:</span>
+                    <span class="value" id="sys-time">00:00:00</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-interface">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-title">
+                    <span class="icon">◈</span> AGENTS
+                    <button id="add-agent-btn" class="cyber-btn-icon" title="Deploy New Agent">+</button>
+                </div>
+                <div class="agent-list-container">
+                    <ul id="agent-list" class="agent-list">
+                        <!-- Agents injected here -->
+                    </ul>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="status-indicator">
+                        <span class="led"></span> SYSTEM READY
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Terminal Area -->
+            <main class="terminal-wrapper">
+                <div id="empty-state" class="empty-state">
+                    <div class="cyber-logo">W3</div>
+                    <h2>AWAITING CONNECTION</h2>
+                    <p>Select an agent to initialize uplink.</p>
+                </div>
+
+                <div id="terminal-container" class="terminal-container hidden">
+                    <div class="terminal-top-bar">
+                        <div class="active-agent-info">
+                            <span class="label">TARGET:</span>
+                            <span id="active-agent-alias" class="value">UNKNOWN</span>
+                            <span class="separator">//</span>
+                            <span id="active-agent-url" class="value url">...</span>
+                        </div>
+                        <div class="window-controls">
+                            <span>_</span>
+                            <span>□</span>
+                            <span>×</span>
+                        </div>
+                    </div>
+                    <div id="terminal-output" class="terminal-output">
+                        <!-- Output injected here -->
+                    </div>
+                    <div class="terminal-input-line">
+                        <span class="prompt">root@weevely:~#</span>
+                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="add-agent-modal" class="modal">
+        <div class="modal-content cyber-card">
+            <div class="modal-header">
+                <h3>DEPLOY NEW AGENT</h3>
+            </div>
+            <form id="add-agent-form">
+                <div class="form-group">
+                    <label>TARGET URL</label>
+                    <input type="url" name="url" required placeholder="http://target.com/agent.php">
+                </div>
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <input type="text" name="password" required placeholder="Secret">
+                </div>
+                <div class="form-group">
+                    <label>ALIAS</label>
+                    <input type="text" name="alias" placeholder="Target_01">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancel-add-agent" class="cyber-btn secondary">ABORT</button>
+                    <button type="submit" class="cyber-btn primary">DEPLOY</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="app.js"></script>
+</body>
+
+</html>

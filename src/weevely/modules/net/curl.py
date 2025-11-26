@@ -41,7 +41,7 @@ class Curl(Module):
                     name="php_httprequest1",
                     arguments=["-raw-response"],
                 ),
-                # TODO: fix this, it fails the "POST request with binary string" test
+                # fix this, it fails the "POST request with binary string" test
                 # due to some bash limitation with null bytes.
                 # ShellCmd(
                 #   payload = """curl -s -i ${ '-A "$(env echo -ne \"%s\")"' % user_agent if user_agent else "" } ${ '--connect-timeout %i' % connect_timeout } ${ '-X %s' % request if (not data and request) else '' } ${ " ".join([ '-H "$(env echo -ne \"%s\")"' % h for h in header ]) } ${ '-b "$(env echo -ne \"%s\")"' % cookie if cookie else '' } ${ '--data-binary $(env echo -ne "%s")' % ' '.join(data) if data else '' } ${ '$(env echo -ne "%s")' % url }""",

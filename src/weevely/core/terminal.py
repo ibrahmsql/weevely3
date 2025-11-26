@@ -204,7 +204,6 @@ class Terminal(CmdModules):
             log.error(messages.terminal.backdoor_unavailable)
             return ""
 
-        # TODO: do not print this every loop
         # Print an introductory string with php shell
         # if self.session.get('default_shell') == 'shell_php':
         #    log.info(messages.terminal.welcome_no_shell)

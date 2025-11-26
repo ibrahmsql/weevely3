@@ -369,3 +369,118 @@ class PythonCode(ShellCmd):
 
         b64 = base64.b64encode(payload.encode("utf-8")).decode("utf-8")
         return ["echo", b64, "|base64 -d|python - 2>&1"]
+
+
+class JspCmd(ModuleExec):
+    """This vector contains a shell command for JSP agent.
+
+    The command is executed via the module `shell_jsp`. Inherit `ModuleExec`.
+
+    Args:
+        payload (str): Command to execute.
+        name (str): This vector name.
+        target (Os): The operating system supported by the vector.
+        postprocess (func): The function which postprocess the execution result.
+        background (bool): Execute in a separate thread on `run()`
+    """
+
+    def __init__(
+        self, payload, name=None, target=0, postprocess=None, arguments=[], background=False, catch_errors=True
+    ):
+        if not isinstance(payload, str):
+            raise DevException(messages.vectors.wrong_payload_type)
+
+        ModuleExec.__init__(
+            self,
+            module="shell_jsp",
+            arguments=[payload] + arguments,
+            name=name,
+            target=target,
+            postprocess=postprocess,
+            background=background,
+            catch_errors=catch_errors,
+        )
+
+
+class CfmCmd(ModuleExec):
+    """This vector contains a shell command for ColdFusion agent."""
+
+    def __init__(
+        self, payload, name=None, target=0, postprocess=None, arguments=[], background=False, catch_errors=True
+    ):
+        if not isinstance(payload, str):
+            raise DevException(messages.vectors.wrong_payload_type)
+
+        ModuleExec.__init__(
+            self,
+            module="shell_cfm",
+            arguments=[payload] + arguments,
+            name=name,
+            target=target,
+            postprocess=postprocess,
+            background=background,
+            catch_errors=catch_errors,
+        )
+
+
+class AspCmd(ModuleExec):
+    """This vector contains a shell command for Classic ASP agent."""
+
+    def __init__(
+        self, payload, name=None, target=0, postprocess=None, arguments=[], background=False, catch_errors=True
+    ):
+        if not isinstance(payload, str):
+            raise DevException(messages.vectors.wrong_payload_type)
+
+        ModuleExec.__init__(
+            self,
+            module="shell_asp",
+            arguments=[payload] + arguments,
+            name=name,
+            target=target,
+            postprocess=postprocess,
+            background=background,
+            catch_errors=catch_errors,
+        )
+
+
+class CgiCmd(ModuleExec):
+    """This vector contains a shell command for CGI agent."""
+
+    def __init__(
+        self, payload, name=None, target=0, postprocess=None, arguments=[], background=False, catch_errors=True
+    ):
+        if not isinstance(payload, str):
+            raise DevException(messages.vectors.wrong_payload_type)
+
+        ModuleExec.__init__(
+            self,
+            module="shell_cgi",
+            arguments=[payload] + arguments,
+            name=name,
+            target=target,
+            postprocess=postprocess,
+            background=background,
+            catch_errors=catch_errors,
+        )
+
+
+class NodeCmd(ModuleExec):
+    """This vector contains a shell command for Node.js agent."""
+
+    def __init__(
+        self, payload, name=None, target=0, postprocess=None, arguments=[], background=False, catch_errors=True
+    ):
+        if not isinstance(payload, str):
+            raise DevException(messages.vectors.wrong_payload_type)
+
+        ModuleExec.__init__(
+            self,
+            module="shell_node",
+            arguments=[payload] + arguments,
+            name=name,
+            target=target,
+            postprocess=postprocess,
+            background=background,
+            catch_errors=catch_errors,
+        )

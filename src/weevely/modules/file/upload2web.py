@@ -112,8 +112,12 @@ class Upload2web(Module):
             # Get remote file name from lpath
             lfolder, rname = os.path.split(lpath)
 
-            # TODO: all the paths should be joined with remote OS_SEP from system_info.
-            self.args["rpath"] = os.path.join(folders[0], rname)
+            # Join paths using remote OS separator
+            sep = ModuleExec("system_info", ["-info", "os_sep"]).load_result_or_run("os_sep") or "/"
+            if sep == "\\":
+                self.args["rpath"] = folders[0].rstrip("\\") + "\\" + rname
+            else:
+                self.args["rpath"] = folders[0].rstrip("/") + "/" + rname
 
         file_upload_args = [lpath, self.args["rpath"]]
         if content:

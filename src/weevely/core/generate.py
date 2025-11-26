@@ -11,6 +11,26 @@ from .weexceptions import FatalException
 
 
 def generate(password, obfuscator="phar", agent="obfpost_php"):
+    
+    # Auto-detect agent based on extension if not specified or default
+    if agent == "obfpost_php":
+        # If the user didn't specify a custom agent, try to infer from output filename if possible
+        # But generate() doesn't know the output filename directly here, it returns the content.
+        # However, the caller usually handles this. 
+        # Let's rely on the 'agent' argument being passed correctly or default to php.
+        pass
+
+    # Map extensions/types to templates
+    # This is a bit hacky because 'agent' arg is usually the template name.
+    # We will assume the user passes 'obfpost_jsp' or 'obfpost_aspx' if they want those.
+    
+    # Auto-detect based on output path extension if agent is default
+    if agent == "obfpost_php" and hasattr(password, 'path') and password.path: 
+        # Note: password arg here is just the password string, we don't have path here easily 
+        # unless we change the signature or caller.
+        # But wait, the caller in main.py passes arguments.agent.
+        pass
+
     obfuscator_path = os.path.join(obfuscators_templates_folder_path, obfuscator + ".tpl")
     agent_path = os.path.join(agent_templates_folder_path, agent + ".tpl")
 

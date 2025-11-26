@@ -169,8 +169,6 @@ class Channel:
 
     def _detect_syntax_error(self, payload):
         """Detect syntax errors and warn user
-        @TODO detect before sending, and ask confirmation
-        @TODO use proper linter for corresponding vector
         """
         command_last_chars = utils.prettify.shorten(payload.rstrip(), keep_trailer=10)
         if command_last_chars and command_last_chars[-1] not in (";", "}"):

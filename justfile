@@ -45,3 +45,33 @@ build:
 install-build: build
 	#!/bin/bash
 	uv tool install --force dist/*.whl
+
+# check code quality
+lint:
+	#!/bin/bash
+	ruff check src
+	ruff format --check src
+
+# fix code quality issues
+fix:
+	#!/bin/bash
+	ruff check --fix src
+	ruff format src
+
+# type check
+typecheck:
+	#!/bin/bash
+	mypy src
+
+# build docker image
+docker-build:
+	docker build -t weevely .
+
+# run docker container
+docker-run cmd="--help":
+	docker run --rm -it weevely {{cmd}}
+
+# run c2 dashboard
+c2:
+	#!/bin/bash
+	uv run uvicorn weevely.c2.main:app --reload --port 8000

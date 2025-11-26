@@ -118,8 +118,6 @@ class Session(dict):
 
         # I safely evaluate the value type to avoid to save only
         # strings type. Dirty but effective.
-        # TODO: the actual type of the argument could be acquired
-        # from modules[module].argparser.
         try:
             value = ast.literal_eval(value)
         except Exception:

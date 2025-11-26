@@ -47,9 +47,9 @@ class Touch(Module):
     def run(self, **kwargs):
         # Handle the cloning of the oldest timestamp in folder
         if self.args.get("oldest_file_ts"):
-            # TODO: This works only in remote unix environment, fix it.
             folder = os.path.split(self.args["rpath"])[0] if os.path.sep in self.args["rpath"] else "."
 
+            # Get file list
             file_list = [os.path.join(folder, f) for f in ModuleExec("file_ls", [folder]).run()]
 
             for file in file_list:

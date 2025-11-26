@@ -4,6 +4,11 @@ from weevely.core.module import Module
 from weevely.core.module import Status
 from weevely.core.vectors import Os
 from weevely.core.vectors import PhpCode
+from weevely.core.vectors import JspCmd
+from weevely.core.vectors import CfmCmd
+from weevely.core.vectors import AspCmd
+from weevely.core.vectors import CgiCmd
+from weevely.core.vectors import NodeCmd
 
 
 class Sh(Module):
@@ -68,6 +73,16 @@ class Sh(Module):
                     name="pcntl",
                     target=Os.NIX,
                 ),
+                # JSP Vector
+                JspCmd("${command}", "jsp_runtime"),
+                # ColdFusion Vector
+                CfmCmd("${command}", "cfm_runtime"),
+                # Classic ASP Vector
+                AspCmd("${command}", "asp_runtime"),
+                # CGI Vector
+                CgiCmd("${command}", "cgi_runtime"),
+                # Node.js Vector
+                NodeCmd("${command}", "node_runtime"),
             ]
         )
 
